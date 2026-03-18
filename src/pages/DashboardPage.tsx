@@ -1,3 +1,6 @@
 export default function DashboardPage() {
-    return <h2>Dashboard</h2>;
+    return <section>
+        <h2>Dashboard</h2>
+        <p>Welcome to your budget tracker.</p>
+    </section>
 }
