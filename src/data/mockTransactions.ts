@@ -19,4 +19,13 @@ export const mockTransactions: Transaction[] = [
     location: 'Verovkin Oleksandr',
     date: '2026-03-17',
   },
+  {
+  id: '3',
+  amount: 142.89,
+  type: 'expense',
+  category: 'Продукти',
+  accountName: 'Картка',
+  location: 'АТБ',
+  date: '2026-03-16',
+}
 ];

@@ -72,3 +72,13 @@ main {
 .transaction_amount_income {
   color: #20a464;
 }
+
+.transaction-group {
+  margin-bottom: 32px;
+}
+
+.transaction-group__title {
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 600;
+}
