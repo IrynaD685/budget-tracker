@@ -1,6 +1,6 @@
-import type { Transaction } from "../types/transaction";
+import type { IncomeExpenseTransaction } from "../types/transaction.js";
 
-export const mockTransactions: Transaction[] = [
+export const mockTransactions: IncomeExpenseTransaction[] = [
     {
     id: '1',
     amount: 37.00,

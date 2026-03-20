@@ -1,7 +1,7 @@
-import type { Transaction } from "../../types/transaction";
+import type { IncomeExpenseTransaction } from "../../types/transaction.js";
 
 type TransactionItemProps = {
-    transactionData: Transaction
+    transactionData: IncomeExpenseTransaction
 }
 
 export default function TransactionItem({ transactionData }: TransactionItemProps) {
