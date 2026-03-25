@@ -1,0 +1,38 @@
+ .transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.meta {
+  font-size: 18px;
+  color: #7a7a7a;
+}
+
+.amount {
+  font-size: 24px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.expense {
+  color: #111;
+}
+
+.income {
+  color: #20a464;
+}

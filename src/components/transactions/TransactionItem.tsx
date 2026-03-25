@@ -1,4 +1,5 @@
 import type { IncomeExpenseTransaction } from "../../types/transaction.js";
+import classes from "./TransactionItem.module.css";
 
 type TransactionItemProps = {
     transactionData: IncomeExpenseTransaction
@@ -10,17 +11,17 @@ export default function TransactionItem({ transactionData }: TransactionItemProp
         maximumFractionDigits: 2,
     });
     const sign: string = transactionData.type === "expense" ? "-" : "+";
-    const amountClassName = transactionData.type === "expense" ? "transaction_amount_expense"
-        : "transaction_amount_income";
+    const amountClassName = transactionData.type === "expense" ? classes.expense
+        : classes.income;
 
     return (
-        <div className="transaction">
-            <div className="transaction_info">
-                <div className="transaction_category">{transactionData.category}</div>
-                <div className="transaction_meta">{transactionData.accountName}</div>
-                <div className="transaction_meta">{transactionData.location}</div>
+        <div className={classes.transaction}>
+            <div className={classes.info}>
+                <div className={classes.category}>{transactionData.category}</div>
+                <div className={classes.meta}>{transactionData.accountName}</div>
+                <div className={classes.meta}>{transactionData.location}</div>
             </div>
-            <div className={`transaction_amount ${amountClassName}`}>
+            <div className={`${classes.amount} ${amountClassName}`}>
                 {sign}{formattedAmount} {transactionData.currency ?? "₴"}
             </div>
         </div>

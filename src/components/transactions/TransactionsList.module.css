@@ -1,0 +1,9 @@
+.group {
+  margin-bottom: 32px;
+}
+
+.groupTitle {
+  margin: 0 0 16px;
+  font-size: 28px;
+  font-weight: 600;
+}

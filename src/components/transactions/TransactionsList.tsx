@@ -1,6 +1,7 @@
 import { mockTransactions } from "../../data/mockTransactions";
 import TransactionItem from "./TransactionItem";
 import { formatTransactionDate } from "../../utils/formatTransactionDate.js";
+import classes from "./TransactionsList.module.css";
 
 type GroupedTransactions = {
     title: string;
@@ -27,8 +28,8 @@ export default function TransactionsList() {
     return (
         <div>
             {groupedTransactions.map(group => (
-                <div key={group.title} className="">
-                    <h3 className="">{group.title}</h3>
+                <div key={group.title} className={classes.group}>
+                    <h3 className={classes.groupTitle}>{group.title}</h3>
                     <div>{
                         group.items.map(item => (
                             <TransactionItem key={item.id} transactionData={item}/>
