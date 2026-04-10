@@ -32,3 +32,7 @@
   border-color: #050505;
   box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
 }
+
+.errorWrapper {
+  color: #b91c1c;
+}
