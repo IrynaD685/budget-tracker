@@ -1,17 +1,22 @@
-import { mockTransactions } from "../../data/mockTransactions";
 import TransactionItem from "./TransactionItem";
-import { formatTransactionDate } from "../../utils/formatTransactionDate.js";
+import { formatTransactionDate } from "../../utils/formatTransactionDate";
 import classes from "./TransactionsList.module.css";
+import type { Transaction } from "../../types/transaction";
 
 type GroupedTransactions = {
     title: string;
-    items: typeof mockTransactions;
+    items: Transaction[];
 };
 
-export default function TransactionsList() {
+type TransactionsListProps = {
+    transactions: Transaction[];
+}
+
+export default function TransactionsList({ transactions }: TransactionsListProps) {
+    console.log(transactions)
     const groupedTransactions: GroupedTransactions[] = [];
 
-    for (const transaction of mockTransactions) {
+    for (const transaction of transactions) {
         const groupTitle = formatTransactionDate(transaction.date);
         const existingGroup = groupedTransactions.find(group => group.title === groupTitle);
 
@@ -32,9 +37,9 @@ export default function TransactionsList() {
                     <h3 className={classes.groupTitle}>{group.title}</h3>
                     <div>{
                         group.items.map(item => (
-                            <TransactionItem key={item.id} transactionData={item}/>
-                        ))
-                        }</div>
+                            <TransactionItem key={item.id} transactionData={item} />
+                        ))}
+                    </div>
                 </div>
             ))}
         </div>

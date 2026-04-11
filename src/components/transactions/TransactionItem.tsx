@@ -1,18 +1,17 @@
-import type { IncomeExpenseTransaction } from "../../types/transaction.js";
+import type { Transaction } from "../../types/transaction";
 import classes from "./TransactionItem.module.css";
 
 type TransactionItemProps = {
-    transactionData: IncomeExpenseTransaction
+    transactionData: Transaction
 }
 
 export default function TransactionItem({ transactionData }: TransactionItemProps) {
-    const formattedAmount: string = transactionData.amount.toLocaleString('uk-UA', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-    });
-    const sign: string = transactionData.type === "expense" ? "-" : "+";
-    const amountClassName = transactionData.type === "expense" ? classes.expense
-        : classes.income;
+    const sign = transactionData.type === "expense" ? "-" : "+";
+    const amountClassName = transactionData.type === "expense" ? classes.expense : classes.income;
+
+    if (transactionData.type === "debt" || transactionData.type === "transfer") {
+        return null;
+    }
 
     return (
         <div className={classes.transaction}>
@@ -22,7 +21,7 @@ export default function TransactionItem({ transactionData }: TransactionItemProp
                 <div className={classes.meta}>{transactionData.location}</div>
             </div>
             <div className={`${classes.amount} ${amountClassName}`}>
-                {sign}{formattedAmount} {transactionData.currency ?? "₴"}
+                {sign}{transactionData.amount} {transactionData.currency ?? "₴"}
             </div>
         </div>
     );
