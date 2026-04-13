@@ -8,3 +8,13 @@ body {
 main {
   padding: 24px;
 }
+
+.emptyState {
+  margin-top: 24px;
+  padding: 24px;
+  background-color: #ffffff;
+  border: 1px dashed #cfcfcf;
+  border-radius: 16px;
+  color: #666;
+  font-size: 18px;
+}

@@ -1,6 +1,7 @@
 import type { TransactionType } from "../../types/transaction";
 import classes from "./TransactionForm.module.css";
 import IncomeExpenseForm from "./IncomeExpenseForm";
+import EmptyState from "../ui/EmptyState";
 
 type Props = {
     type: TransactionType
@@ -8,7 +9,7 @@ type Props = {
 
 export default function TransactionForm({ type }: Props) {
     if (type === "transfer" || type === "debt") {
-        return <div className={classes.placeholder}>Поки не реалізовано</div>;
+        return <EmptyState>Поки не реалізовано</EmptyState>;
     }
 
     if (type === "income" || type === "expense") {

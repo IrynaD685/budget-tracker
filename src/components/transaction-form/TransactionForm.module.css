@@ -8,16 +8,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.placeholder {
-  margin-top: 24px;
-  padding: 24px;
-  background-color: #ffffff;
-  border: 1px dashed #cfcfcf;
-  border-radius: 16px;
-  color: #666;
-  font-size: 18px;
-}
-
 .submit {
   width: 100%;
   margin-top: 8px;
