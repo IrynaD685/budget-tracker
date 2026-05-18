@@ -21,9 +21,9 @@ type IncomeExpenseFormData = {
 type TransactionFormData = IncomeExpenseFormData; // todo add aditional types for other types of transactions
 
 export default function TransactionForm({ type, mode, initialValues }: Props) {
-    const { addNewTransaction, deleteTransaction } = useContext(TransactionsContext);
+    const { addNewTransaction, deleteTransaction, editeTransaction } = useContext(TransactionsContext);
 
-    const handleSubmitTransaction  = (data: TransactionFormData) => {
+    const handleSubmitTransaction = (data: TransactionFormData) => {
         if (type !== "income" && type !== "expense") {
             return;
         }
@@ -41,7 +41,16 @@ export default function TransactionForm({ type, mode, initialValues }: Props) {
         }
 
         if (mode === "edit") {
-            console.log("тут потім буде update transaction", data);
+            if (!initialValues) {
+                return;
+            }
+
+            const transaction: Transaction = {
+                ...initialValues,
+                ...data,
+            };
+
+            editeTransaction(transaction);
         }
     };
 

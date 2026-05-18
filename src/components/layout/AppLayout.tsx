@@ -22,16 +22,28 @@ export default function AppLayout() {
         navigate("/");
     }
 
-    function deleteTransaction(id:  TransactionId) {
+    function deleteTransaction(id: TransactionId) {
         console.log("trying to delete")
         setTransactions((prevTransactions) => prevTransactions.filter(transaction => transaction.id !== id));
+        navigate("/");
+    }
+
+    function editeTransaction(updatedTransaction: Transaction) {
+        setTransactions((prevTransactions) =>
+            prevTransactions.map((transaction) =>
+                transaction.id === updatedTransaction.id
+                    ? updatedTransaction
+                    : transaction
+            )
+        );
         navigate("/");
     }
 
     const ctxValue = {
         transactions,
         addNewTransaction,
-        deleteTransaction
+        deleteTransaction,
+        editeTransaction
     }
 
     return <TransactionsContext.Provider value={ctxValue}>
