@@ -11,10 +11,42 @@ type Props = {
     initialValues?: Transaction
 }
 
+type IncomeExpenseFormData = {
+    amount: string;
+    category: string;
+    date: string;
+    note?: string;
+};
+
+type TransactionFormData = IncomeExpenseFormData; // todo add aditional types for other types of transactions
+
 export default function TransactionForm({ type, mode, initialValues }: Props) {
-    const { deleteTransaction } = useContext(TransactionsContext);
+    const { addNewTransaction, deleteTransaction } = useContext(TransactionsContext);
+
+    const handleSubmitTransaction  = (data: TransactionFormData) => {
+        if (type !== "income" && type !== "expense") {
+            return;
+        }
+
+        if (mode === "create") {
+            const newTransaction: IncomeExpenseTransaction = {
+                id: crypto.randomUUID(),
+                type,
+                accountName: "Картка",
+                ...data,
+            };
+
+            addNewTransaction(newTransaction);
+            return;
+        }
+
+        if (mode === "edit") {
+            console.log("тут потім буде update transaction", data);
+        }
+    };
+
     let transactionActions = <button className={classes.submit} type="submit" >Додати транзакцію</button>;
-    
+
     const handleDelete = () => {
         if (!initialValues) {
             return;
@@ -35,9 +67,9 @@ export default function TransactionForm({ type, mode, initialValues }: Props) {
 
     if (type === "income" || type === "expense") {
         return <IncomeExpenseForm
-            type={type}
             classes={classes}
             initialValues={initialValues as IncomeExpenseTransaction | undefined}
+            onSubmit={handleSubmitTransaction}
         >
             {transactionActions}
         </IncomeExpenseForm>

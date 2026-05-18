@@ -1,10 +1,8 @@
-import type { IncomeExpenseTransaction, IncomeExpenseType, Transaction } from "../../types/transaction";
+import type { IncomeExpenseTransaction } from "../../types/transaction";
 import Input from "../ui/Input";
 import { Controller, useForm, type FieldErrors } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useContext } from "react";
-import { TransactionsContext } from "../../store/transactions-context";
 
 type FormData = {
     amount: string;
@@ -21,14 +19,13 @@ const schema: yup.ObjectSchema<FormData> = yup.object({
 }).required();
 
 type Props = {
-    type: IncomeExpenseType,
     classes: CSSModuleClasses,
     initialValues?: IncomeExpenseTransaction,
     children: any,
+    onSubmit: (data: FormData) => void,
 }
 
-export default function IncomeExpenseForm({ type, classes, initialValues, children }: Props) {
-    const { addNewTransaction } = useContext(TransactionsContext);
+export default function IncomeExpenseForm({ classes, initialValues, children, onSubmit }: Props) {
     const { register, control, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -39,20 +36,6 @@ export default function IncomeExpenseForm({ type, classes, initialValues, childr
         }
     });
 
-    const onValid = (data: FormData) => {
-        if (initialValues) {
-            return;
-        }
-        const newTransaction = {
-            id: crypto.randomUUID(),
-            type,
-            accountName: "Картка",
-            ...data,
-        };
-        console.log("adding new transaction")
-
-        addNewTransaction(newTransaction);
-    };
     const onInvalid = (errors: FieldErrors<FormData>): void => console.log(errors);
 
     const handleChange = (value: string): string | undefined => {
@@ -64,7 +47,7 @@ export default function IncomeExpenseForm({ type, classes, initialValues, childr
         return value;
     }
 
-    return <form className={classes.form} onSubmit={handleSubmit(onValid, onInvalid)}>
+    return <form className={classes.form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <Controller
             name="amount"
             control={control}
