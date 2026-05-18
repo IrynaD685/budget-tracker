@@ -1,9 +1,10 @@
 export type TransactionType = "expense" | "income" | "transfer" | "debt";
 export type IncomeExpenseType = "income" | "expense";
 export type DebtDirection = "i_lent" | "i_borrowed";
+export type TransactionId = `${string}-${string}-${string}-${string}-${string}`;
 
 export interface BaseTransaction {
-    id: `${string}-${string}-${string}-${string}-${string}`;
+    id: TransactionId;
     type: TransactionType;
     amount: string;
     date: string;

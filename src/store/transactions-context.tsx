@@ -4,11 +4,13 @@ import type { Transaction } from "../types/transaction";
 export type TransactionsContextType = {
   transactions: Transaction[];
   addNewTransaction: (transaction: Transaction) => void;
+  deleteTransaction: (id: `${string}-${string}-${string}-${string}-${string}`) => void;
 };
 
 export const TransactionsContext = createContext<TransactionsContextType>({
   transactions: [],
-  addNewTransaction: () => {},
+  addNewTransaction: () => { },
+  deleteTransaction: () => { },
 });
 
 

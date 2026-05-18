@@ -9,7 +9,7 @@ export default function AddTransactionPage() {
     return <section>
         <section>
             <TransactionTypeTabs activeType={activeType} onChange={setActiveType}/>
-            <TransactionForm type={activeType}/>
+            <TransactionForm type={activeType} mode="create"/>
         </section>
     </section>;
 }

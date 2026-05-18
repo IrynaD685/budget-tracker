@@ -1,4 +1,4 @@
-import type { IncomeExpenseType } from "../../types/transaction";
+import type { IncomeExpenseTransaction, IncomeExpenseType, Transaction } from "../../types/transaction";
 import Input from "../ui/Input";
 import { Controller, useForm, type FieldErrors } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,26 +22,38 @@ const schema: yup.ObjectSchema<FormData> = yup.object({
 
 type Props = {
     type: IncomeExpenseType,
-    classes: CSSModuleClasses
+    classes: CSSModuleClasses,
+    initialValues?: IncomeExpenseTransaction,
+    children: any,
 }
 
-export default function IncomeExpenseForm({ type, classes }: Props) {
+export default function IncomeExpenseForm({ type, classes, initialValues, children }: Props) {
     const { addNewTransaction } = useContext(TransactionsContext);
     const { register, control, handleSubmit, formState: { errors } } = useForm<FormData>({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
+        defaultValues: {
+            amount: initialValues?.amount ?? "",
+            category: initialValues?.category ?? "",
+            date: initialValues?.date ?? "",
+            note: initialValues?.note ?? "",
+        }
     });
 
     const onValid = (data: FormData) => {
+        if (initialValues) {
+            return;
+        }
         const newTransaction = {
             id: crypto.randomUUID(),
             type,
             accountName: "Картка",
             ...data,
         };
+        console.log("adding new transaction")
 
         addNewTransaction(newTransaction);
     };
-    const onInvalid = (errors: FieldErrors<FormData>): void => console.log(errors)
+    const onInvalid = (errors: FieldErrors<FormData>): void => console.log(errors);
 
     const handleChange = (value: string): string | undefined => {
         const validationRegex = /^$|^(?!\.)(\d+(\.\d*)?|\d+)$/;
@@ -56,7 +68,6 @@ export default function IncomeExpenseForm({ type, classes }: Props) {
         <Controller
             name="amount"
             control={control}
-            defaultValue=""
             render={({ field }) => (
                 <Input
                     label="Сума"
@@ -92,7 +103,7 @@ export default function IncomeExpenseForm({ type, classes }: Props) {
             error={errors.note}
             {...register("note")}
         />
-        <button className={classes.submit} type="submit" >Зберегти</button>
+        {children}
     </form>;
 
 }

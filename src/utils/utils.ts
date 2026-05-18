@@ -30,3 +30,7 @@ export const sortTransactions = (transactions: Transaction[]): GroupedTransactio
 
     return groupedTransactions;
 }
+
+export function getTransactionById(transactions: Transaction[], id: string | undefined): Transaction | undefined {
+    return transactions.find(transaction => transaction.id === id);
+}
