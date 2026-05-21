@@ -23,7 +23,6 @@ export default function AppLayout() {
     }
 
     function deleteTransaction(id: TransactionId) {
-        console.log("trying to delete")
         setTransactions((prevTransactions) => prevTransactions.filter(transaction => transaction.id !== id));
         navigate("/");
     }

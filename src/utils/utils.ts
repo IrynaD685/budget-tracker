@@ -34,3 +34,26 @@ export const sortTransactions = (transactions: Transaction[]): GroupedTransactio
 export function getTransactionById(transactions: Transaction[], id: string | undefined): Transaction | undefined {
     return transactions.find(transaction => transaction.id === id);
 }
+
+export function getTransactionsSummary(transactions: Transaction[]) {
+    return transactions.reduce(
+        (summary, transaction) => {
+            if (transaction.type === "income") {
+                summary.income += Number(transaction.amount);
+            }
+
+            if (transaction.type === "expense") {
+                summary.expense += Number(transaction.amount);
+            }
+
+            summary.balance = summary.income - summary.expense;
+
+            return summary;
+        },
+        {
+            income: 0,
+            expense: 0,
+            balance: 0,
+        }
+    );
+}
